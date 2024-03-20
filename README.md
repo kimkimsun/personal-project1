@@ -5,11 +5,11 @@
 ![Unity](https://img.shields.io/badge/unity-%23000000.svg?style=for-the-badge&logo=unity&logoColor=white)
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white)
 ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white)
+# 프로젝트 특징
+#### 약 1달간에 유니티 공부를 한 뒤, 시작한 첫 개인 프로젝트 입니다.
 # 게임 특징
 #### 컴퓨터 한대로 하는 2인용 게임입니다.
 #### 상호작용키를 다르게 설정하여 협동하면서 플레이하는 2D 퍼즐 플랫포머 게임입니다.
-# 프로젝트 특징
-#### 약 1달간에 유니티 공부를 한 뒤, 시작한 첫 개인 프로젝트 입니다.
 # **핵심 기능**
 ## 첫 번째 기능
 ### 기능설명
