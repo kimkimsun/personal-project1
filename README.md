@@ -10,6 +10,8 @@
 # 게임 특징
 #### 컴퓨터 한대로 하는 2인용 게임입니다.
 #### 상호작용키를 다르게 설정하여 협동하면서 플레이하는 2D 퍼즐 플랫포머 게임입니다.
+# 게임 영상 (이미지 클릭)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/DCpZCHbnalA/0.jpg)](https://youtu.be/DCpZCHbnalA)
 # **핵심 기능**
 ## 첫 번째 기능
 ### 기능설명
@@ -22,6 +24,56 @@
 ##### 위와 같은 구조로 이루어져있습니다.
 
 ##### 확장성을 고려하여 인터페이스로 상속을 받았고 객체지향으로서의 유연성을 고려하였습니다.
+
+<details>
+    <summary>코드</summary>
+    
+### 코드
+```C#
+public interface IAttackable
+{
+    void Attack(IHitable hitobj);
+    float Damage
+    {
+        get;
+        set;
+    }
+}
+public interface IHitable
+{
+    void Hit(float damage);
+}
+```
+
+```C#
+public class Player : MonoBehaviour, IReversalObj, IHitable
+{
+    public virtual void Hit(float damage)
+    {
+        playerRb.AddRelativeForce(Vector2.right * 5 * Time.deltaTime, ForceMode2D.Impulse);
+    }
+}
+
+public class Monster : MonoBehaviour, IAttackable, IHitable
+{
+    public void Attack(IHitable hitobj)
+    {
+        hitobj.Hit(damage);
+    }
+
+    public void Hit(float damage)
+    {
+        Hp -= damage;
+        gameObject.layer = hitLayer;
+        gameObject.transform.GetChild(0).gameObject.layer = hitLayer;
+        monsterRb.AddRelativeForce(Vector2.up * 3, ForceMode2D.Impulse);
+        monsterRb.AddRelativeForce(Vector2.left * 3, ForceMode2D.Impulse);
+        StartCoroutine(ChangeColor());
+    }
+}
+```
+</details>
+
 
 ## 두 번째 기능
 ### 기능 설명
@@ -36,6 +88,49 @@
 ### 다이어그램
 ![갠프 중력반전 다이어그램](https://github.com/kimkimsun/1st-TeamProject/assets/116052108/4f24cf5f-8755-475a-8ce0-ee81e0ceb61e)
 ##### 위와 같은 구조로 이루어져있습니다.
+
+<details>
+    <summary>코드</summary>
+    
+### 코드
+```C#
+public interface IReversalAble
+{
+    void Reversal(IReversalObj reversalObj);
+}
+
+public interface IReversalObj
+{
+    void ReversalObj();
+}
+
+```
+
+```C#
+public class ReversalZone : MonoBehaviour, IReversalAble
+{
+    public void Reversal(IReversalObj reversalObj)
+    {
+        reversalObj.ReversalObj();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.TryGetComponent(out IReversalObj obj))
+            Reversal(obj);
+    }
+}
+
+public class Player : MonoBehaviour, IReversalObj, IHitable
+{
+    public void ReversalObj()
+    {
+        playerMove.IsGravity = !playerMove.IsGravity;
+        transform.localScale = new Vector2(transform.localScale.x, (transform.localScale.y * -1));
+        playerRb.gravityScale *= -1;
+    }
+}
+```
+</details>
 
 ## 세 번째 기능
 ### 기능설명
@@ -56,6 +151,22 @@ public class Inventory : MonoBehaviour
                 slot[i].SetItem(iitem);
                 return;
             }
+        }
+    }
+}
+
+public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
+    public void SetItem(Item iitem)
+    {
+        item = iitem;      
+        if(item == null)
+            image.sprite = null;
+        else
+        {
+            image.sprite = item.sprite;
+            itemExplanation.text = item.explanation;
+            item.owenrSlotImage = image;
         }
     }
 }
