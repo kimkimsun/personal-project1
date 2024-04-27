@@ -11,7 +11,7 @@
 #### 컴퓨터 한대로 하는 2인용 게임입니다.
 #### 상호작용키를 다르게 설정하여 협동하면서 플레이하는 2D 퍼즐 플랫포머 게임입니다.
 # 게임 영상 (이미지 클릭)
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/DCpZCHbnalA/0.jpg)](https://youtu.be/DCpZCHbnalA)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/H5aW5KRRN3I/0.jpg)](https://youtu.be/H5aW5KRRN3I)
 # **핵심 기능**
 ## 첫 번째 기능
 ### 기능설명
